@@ -1,24 +1,18 @@
 {
-  "name": "testproject",
+  "name": "mongolearn",
   "version": "1.0.0",
-  "description": "TestTask",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ForveX/Test.git"
-  },
-  "author": "rtur",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ForveX/Test/issues"
-  },
-  "homepage": "https://github.com/ForveX/Test#readme",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "mongoose": "^5.5.0",
+    "mongoose": "^5.5.1",
     "nodemon": "^1.18.11"
   }
 }
