@@ -1,22 +1,34 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+var amqp = require('amqplib/callback_api');
 
 const Vechicle = require("../models/vechicles");
 
 router.get("/", (req, res, next) => {
-  Vechicle.find()
-    .exec()
-    .then(docs => {
-      console.log(docs);
-      res.status(200).json(docs);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({
-        error: err
-      });
-    });
+  amqp.connect('amqp://localhost', function(err, conn) {
+  conn.createChannel(function(err, ch) {
+    var q = 'createVech';
+    var msg = 'incremented +1';
+
+    ch.assertQueue(q, {durable: false});
+    ch.sendToQueue(q, Buffer.from(msg));
+    console.log(" [x] Sent %s", msg);
+  });
+  setTimeout(function() { conn.close(); process.exit(0) }, 500);
+});
+  // Vechicle.find()
+  //   .exec()
+  //   .then(docs => {
+  //     console.log(docs);
+  //     res.status(200).json(docs);
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //     res.status(500).json({
+  //       error: err
+  //     });
+  //   });
 });
 
 router.post("/", (req, res, next) => {

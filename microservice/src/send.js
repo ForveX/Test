@@ -3,7 +3,7 @@ var amqp = require('amqplib/callback_api');
 amqp.connect('amqp://localhost', function(err, conn) {
   conn.createChannel(function(err, ch) {
     var q = 'createVech';
-    var msg = '"type": "Car", "brand": "Skoda", "model": "Fabia 2006"';
+    var msg = 'incremented +1';
 
     ch.assertQueue(q, {durable: false});
     ch.sendToQueue(q, Buffer.from(msg));
